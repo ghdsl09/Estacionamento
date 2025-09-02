@@ -28,7 +28,7 @@ let veiculo = {
 
 function entradaDeVeiculo(cnh, nomeMotorista, telefone, placa, modelo, cor) {
   if (vagasDisponiveis > 0) {
-    const NovoVeiculo = {
+    const novoVeiculo = {
       placa,
       modelo,
       cor,
@@ -40,21 +40,22 @@ function entradaDeVeiculo(cnh, nomeMotorista, telefone, placa, modelo, cor) {
     veiculosEstacionados.push(novoVeiculo);
         historicoEntradas.push(novoVeiculo);
         vagasDisponiveis--;
-    console.log('veiculo de placa $(placa), $(modelo) e cor $(cor) entrou no estacionamento as ${novoVeiculo.horaEntrada.toLocaleTimeString()}');
+    console.log(`veiculo de placa $(placa), $(modelo) e cor $(cor) entrou no estacionamento as ${novoVeiculo.horaEntrada.toLocaleTimeString()}`);
     console.log(`Vagas disponíveis agora: ${vagasDisponiveis}\n`);
     return true;
   } else {
     console.log('Desculpe, não há vagas disponíveis no momento.');
     return false;
-  };
+  }
+};
 
-  function saidaDoVeículo(placa) {
+function saidaDoVeículo(placa) {
     const veiculoIndex = veiculosEstacionados.findIndex(veiculo => veiculo.placa === placa);
     
     if (veiculoIndex !== -1) {
       const veiculoEncontrado = veiculosEstacionados[veiculoIndex];
       veiculoEncontrado.horaSaida = new Date();
-      console.log('veiculo de placa $placa(placa) saiu do estacionamento as $horaSaida(veiculoEncontrado.horaSaida)');
+      console.log(`veiculo de placa $placa(placa) saiu do estacionamento as $horaSaida(veiculoEncontrado.horaSaida)`);
       
       const tempoEstacionadoEmHoras = (veiculoEncontrado.horaSaida - veiculoEncontrado.horaEntrada) / (1000 * 60 * 60);
       const turnosEstacionado = Math.ceil(tempoEstacionadoEmHoras / duracaoTurnoEmHoras);
@@ -78,7 +79,7 @@ function entradaDeVeiculo(cnh, nomeMotorista, telefone, placa, modelo, cor) {
     };
   };
 
-  function registrarIncidente(placaCausador, placaVitima, descricao) {
+function registrarIncidente(placaCausador, placaVitima, descricao) {
     const novoIncidente = {
         data: new Date(),
         placaCausador,
@@ -106,7 +107,7 @@ function menu() {
   console.log('6. Encerrar dia de trabalho');
   console.log('--------------------------------------------------');
 
-  rl.question('Escolha uma opção (1-5): ', (opcao) => {
+  rl.question('Escolha uma opção (1-6): ', (opcao) => {
     switch (opcao) {
         case '1':
             rl.question('Digite a CNH do motorista: ', (cnh) => {
@@ -172,6 +173,17 @@ function menu() {
             menu();
             break;
         case '5':
+            rl.question('Digite a placa do veículo causador: ', (placaCausador) => {
+                rl.question('Digite a placa do veículo vítima: ', (placaVitima) => {
+                    rl.question('Descreva o incidente: ', (descricao) => {
+                        registrarIncidente(placaCausador, placaVitima, descricao);
+                        menu();
+                    });
+                });
+            });
+            menu();
+            break;
+        case '6':
             console.log('Encerrando o dia de trabalho...');
             rl.close();
             break;
