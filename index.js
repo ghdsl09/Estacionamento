@@ -88,6 +88,24 @@ while (horarioDeFuncionamento.horarioAtual < horarioDeFuncionamento.Encerramento
   console.log('3. Ver vagas disponíveis');
   console.log('4. Ver total no caixa');
   console.log('5. Encerrar dia de trabalho');
+
+  function registrarIncidente(placaCausador, placaVitima, descricao) {
+    const novoIncidente = {
+        data: new Date(),
+        placaCausador: placaCausador,
+        placaVitima: placaVitima,
+        descricao: descricao
+    };
+
+    listaIncidentes.push(novoIncidente);
+
+    console.log(`\n--- Incidente Registrado ---`);
+    console.log(`Data: ${novoIncidente.data.toLocaleDateString()} ${novoIncidente.data.toLocaleTimeString()}`);
+    console.log(`Veículo causador: ${placaCausador}`);
+    console.log(`Veículo vítima: ${placaVitima}`);
+    console.log(`Descrição: ${descricao}`);
+    console.log(`---------------------------\n`);
+};
 };
 
 console.log('O dia de trabalho terminou. O estacionamento está fechado agora.');
