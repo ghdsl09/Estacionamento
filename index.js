@@ -10,9 +10,9 @@ const vagasTotais = 50;
 let vagasDisponiveis = vagasTotais;
 let caixa = 0;
 const valorEstacionamento = 10;
-let veiculosEstacionados: []; // Array para armazenar os veículos estacionados
-let historicoEntradas: []; // Array para armazenar o histórico de entradas e saídas
-let historicoSaidas: []; // Array para armazenar o histórico de entradas e saídas
+let veiculosEstacionados = []; // Array para armazenar os veículos atualmente estacionados
+let historicoEntradas = []; // Array para armazenar o histórico de entradas e saídas
+let historicoSaidas = []; // Array para armazenar o histórico de entradas e saídas
 
 //objeto a ser preenchido pelo atendimento do estacionamento
 const veiculo = {
@@ -56,7 +56,7 @@ function entradaDeVeiculo(cnh, nomeMotorista, telefone, placa, modelo, cor, tele
       console.log('Veículo não encontrado no estacionamento.');
       return false;
     };
-    function horaAtual = new Date();
+    const horaAtual = new Date ();
     const tempoEstacionadoEmHoras = (horaAtual - veiculoEncontrado.horaEntrada) / (1000 * 60 * 60);
     const custoPorTurnoEstacionado = 10.00; // em reais
     const duracaoDeTurno = 6; // em horas
@@ -74,7 +74,7 @@ function entradaDeVeiculo(cnh, nomeMotorista, telefone, placa, modelo, cor, tele
   };
 };
 
-//I] Inicio do dia de trabalho
+//Inicio do dia de trabalho
 console.log('Bem-vindo ao sistema de gerenciamento de estacionamento! são 08am, o dia de trabalho começou. Hoje temos $vagasTotais(vagasTotais) vagas disponíveis.');
 const horarioDeFuncionamento = {
   horarioAtual: 8, // 8 AM
